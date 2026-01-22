@@ -36,4 +36,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/SWD-CSV:latest
+        tags: ${{ secrets.DOCKER_USERNAME }}/swd-csv:latest
