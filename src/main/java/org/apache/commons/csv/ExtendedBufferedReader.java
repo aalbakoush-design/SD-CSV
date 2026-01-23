@@ -273,4 +273,44 @@ final class ExtendedBufferedReader extends UnsynchronizedBufferedReader {
         super.reset();
     }
 
+    /**
+     * Peeks at the next character in the stream without advancing the position.
+     *
+     * @return the next character, or EOF if end of stream.
+     * @throws IOException if an I/O error occurs.
+     */
+    public int peek() throws IOException {
+        super.mark(1);
+        final int ch = super.read();
+        super.reset();
+        return ch;
+    }
+
+    /**
+     * Peeks at the next characters in the stream without advancing the position.
+     *
+     * @param buf the buffer to fill.
+     * @return the number of characters peeked, or EOF if end of stream.
+     * @throws IOException if an I/O error occurs.
+     */
+    public int peek(final char[] buf) throws IOException {
+        return peek(buf, 0, buf.length);
+    }
+
+    /**
+     * Peeks at the next characters in the stream without advancing the position.
+     *
+     * @param buf the buffer to fill.
+     * @param offset the offset in the buffer.
+     * @param length the number of characters to peek.
+     * @return the number of characters peeked, or EOF if end of stream.
+     * @throws IOException if an I/O error occurs.
+     */
+    public int peek(final char[] buf, final int offset, final int length) throws IOException {
+        super.mark(length);
+        final int len = super.read(buf, offset, length);
+        super.reset();
+        return len;
+    }
+
 }
