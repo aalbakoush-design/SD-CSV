@@ -227,6 +227,9 @@ final class ExtendedBufferedReader extends UnsynchronizedBufferedReader {
             lastChar = EOF;
         }
         position += len;
+        if (encoder != null && len > 0) {
+            this.bytesRead += encoder.encode(CharBuffer.wrap(buf, offset, len)).limit();
+        }
         return len;
     }
 
